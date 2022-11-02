@@ -40,3 +40,11 @@ def daily_min(data):
     :param data: Data array that will be processed
     """
     return np.min(data, axis=0)
+
+def patient_normalise(data):
+    """Normalise patient data from the 2D data array
+    
+    :param data: Data array that will be processed
+    """
+    maxes = np.max(data, axis = 1)
+    return data / maxes[:, np.newaxis]
