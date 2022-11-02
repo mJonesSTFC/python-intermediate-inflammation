@@ -9,6 +9,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
+        python-version: [3.8, 3.9]
 
     # specify the OS of the runner
     runs-on: ${{matrix.os}}
@@ -23,7 +24,7 @@ jobs:
       - name: set up Python 3.9
         uses: actions/setup-python@v2
         with: 
-          python-version: 3.9
+          python-version: ${{matrix.python-version}}
       # install dependencies
       - name: install python dependencies
         run: |
