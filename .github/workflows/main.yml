@@ -15,11 +15,11 @@ jobs:
 
     #define steps
     steps:
-      #first check out the repo
+      # first check out the repo
       - name: Checkout repo
         uses: actions/checkout@v2
 
-      #set up python environment
+      # set up python environment
       - name: set up Python 3.9
         uses: actions/setup-python@v2
         with: 
@@ -30,12 +30,12 @@ jobs:
           python3 -m pip install --upgrade pip
           pip3 install -r requirements.txt
           pip3 install -e .
-      #run tests
+      # run tests
       - name: Test with Pytest
         run: |
           pytest tests/test_models.py
 
-      #run linter
+      # run linter
       -name: check style with Pylint
         run: |
           python3 -m pylint --fail-under=0 --reports=u inflammation
