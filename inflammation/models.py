@@ -46,5 +46,9 @@ def patient_normalise(data):
     
     :param data: Data array that will be processed
     """
-    maxes = np.max(data, axis = 1)
-    return data / maxes[:, np.newaxis]
+    maxes = np.nanmax(data, axis = 1)
+    with np.errstate(invalid = 'ignore', divide = 'ignore')
+        normalised = data / maxes[:, np.newaxis]
+    normalised[np.isnan(normalised)] = 0
+    normalised[normalised < 0]= 0
+    return normalised
