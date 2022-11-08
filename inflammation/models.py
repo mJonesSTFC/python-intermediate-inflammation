@@ -54,3 +54,58 @@ def patient_normalise(data):
     normalised[np.isnan(normalised)] = 0
     normalised[normalised < 0]= 0
     return normalised
+
+class Observation:
+    def __init__(self, day, value):
+        self.day = day
+        self.value = value
+
+    def __str__(self):
+        return str(self.value)
+
+
+class Person:
+    def __init__(self, name: str):
+        self.name = name
+
+    def __str__(self):
+        return self.name
+
+class Patient(Person):
+    """Patient with a name and observations.
+    """
+    def __init__(self, name: str):
+        """_summary_
+        """
+        super().__init__(name)
+        self.observations = []
+
+    @property
+    def last_observation(self):
+        return self.observations[-1]
+
+    def add_observations(self, value, day=None):
+        """_summary_
+
+        Args:
+            value (_type_): _description_
+            day (_type_, optional): _description_. Defaults to None.
+
+        Returns:
+            _type_: _description_
+        """
+        if day is None:
+            if self.observations:
+                day = self.observations[-1].day + 1
+            else:
+                day = 0
+
+        new_observation = Observation(day, value)
+        self.observations.append(new_observation)
+        return new_observation
+class Doctor(Person):
+    def __init__(self, name: str):
+        super().__init__(name)
+        self.patients = []
+    def add_patient(self, patient_name):
+        self.patients.append(patient_name)
